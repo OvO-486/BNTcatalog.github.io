@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <base href=".">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" type="text/css" media="all" href="assets/main.css">
+    <meta name="description" content="BNT Catalog">
+    <meta name="resource-type" content="document">
+    <meta name="distribution" content="global">
+    <meta name="KeyWords" content="BNT">
+    <title>BNT Catalog</title>
+  </head>
+  <body>
+    <div class="banner"> <img src="assets/banner_yanqing.jpg" alt="BNTcat Banner">
+      <div class="top-left"> <span class="title1">BNT Catalog </span>
+      </div>
+      <!-- <div class="bottom-right">&nbsp; December 16-19, 2023<br>
+        Yanqing, Beijing</div> -->
+      <div class="cite">Image taken by Zhuoxiao Wang (王卓骁) at Haituo Mountain,
+        Yanqing</div>
+    </div>
+    <table class="navigation">
+      <tbody>
+        <tr>
+          <td class="navigation"> <a class="current" title="BNT Home Page"
+
+              href=".">Home</a> </td>
+          <td class="navigation"> <a title="BNT Team" href="team">BNT Team</a>
+          </td>
+          <td class="navigation"> <a title="Contact Us" href="contact">Contact</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h2>Star List</h2>
+    <div id="csv-content"></div>
+
+    <script>
+        // read csv file and display content
+        fetch('assets/star_list.csv')
+            .then(response => response.text())
+            .then(text => {
+                const lines = text.split('\n');
+                const table = document.createElement('table');
+                lines.forEach(line => {
+                    const row = document.createElement('tr');
+                    line.split(',').forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        row.appendChild(td);
+                    });
+                    table.appendChild(row);
+                });
+                document.getElementById('csv-content').appendChild(table);
+            });
+    </script>
+
+    <table class="sponsors">
+      <tbody>
+        <tr>
+          <td class="sponsor"> <a href="https://www.tsinghua.edu.cn/"> <img src="assets/Tsinghua.jpg"
+
+                alt="Tsinghua University"> </a> </td>
+          <td class="sponsor_gap"> <br>
+          </td>
+          <td class="sponsor"> <a href="https://astro.tsinghua.edu.cn/"> <img
+
+                src="assets/doa.jpg" alt="Department of Astronomy, Tsinghua University"> </a> </td>
+        </tr>
+      </tbody>
+    </table>
+    <footer> ©BNT Catalog; Based
+      on the template by <a href="https://github.com/mikepierce">Mike Pierce</a>
+    </footer>
+  </body>
+</html>
