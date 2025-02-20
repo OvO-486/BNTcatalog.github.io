@@ -44,11 +44,26 @@
             .then(text => {
                 const lines = text.split('\n');
                 const table = document.createElement('table');
-                lines.forEach(line => {
+                lines.forEach((line, index) => {
+                    if (line.trim() === '') return; // Skip empty lines
                     const row = document.createElement('tr');
-                    line.split(',').forEach(cell => {
+                    const cells = line.split(',');
+                    cells.forEach((cell, cellIndex) => {
                         const td = document.createElement('td');
-                        td.textContent = cell;
+                        if (index > 0 && cellIndex === 0) { // If it's a star name (first column, not header)
+                            const link = document.createElement('a');
+                            const starName = cell.trim();
+                            // Convert star name to URL-friendly format while preserving asterisk
+                            const urlName = starName.replace(/\* /g, '')
+                                                    .replace(/\./g, '')
+                                                    //.replace(/[^\w\s-]/g, '') // 移除非单词字符、空格和连字符以外的所有字符
+                                                    .replace(/\s+/g, '_');
+                            link.href = `stars/${urlName}.html`;
+                            link.textContent = starName;
+                            td.appendChild(link);
+                        } else {
+                            td.textContent = cell;
+                        }
                         row.appendChild(td);
                     });
                     table.appendChild(row);
